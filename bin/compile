@@ -48,8 +48,9 @@ export PATH="$PATH:$CACHE_DIR/multirust/bin"
 export MULTIRUST_HOME="$CACHE_DIR/.multirust"
 
 # Use Multirust
-MULTIRUST_VERSION="$(cat $BUILD_DIR/Cargo.toml | grep -ohzP "(?<=\[target.heroku\])[^\[]*" | grep -ohzP "(?<=version = \")[^\"]*")" || true
+MULTIRUST_VERSION="$(cat $BUILD_DIR/.rust-version)" || true
 if [[ -z "$MULTIRUST_VERSION" ]]; then
+    log "No Rust version specified in .rust-version"
     log "Setting version to \"nightly\" (default)"
     multirust default "nightly"
 else

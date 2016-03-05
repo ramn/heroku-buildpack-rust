@@ -7,29 +7,20 @@
 * Cached `multirust`, Rust toolchain.
 * Caching of previous build artifacts to (potentially dramatically) speed up
 similar builds.
-* Configurable version selection inside of the `Cargo.toml`.
+* Configure Rust version in .rust-version file
 
 ## Configuration
 
 You can use any override you would pass `multirust` for this buildpack.
 
-We currently (ab)use the `cargo`'s "target" feature to set the version desired.
-Unfortunately because of this there are sometimes (harmless) `cargo` warnings
-about an unused value in the `toml` file.
+Create a file `.rust-version` which contains the version number or release channel.
 
-Example:
+Example .rust-version file:
 
-```toml
-[package]
-name = "foo"
-version = "0.1.0"
-authors = ["Andrew Hobden <andrew@hoverbear.org>"]
+```bash
+$ cat .rust-version
+1.7.0
 
-[dependencies]
-iron = "*"
-
-[target.heroku]
-version = "nightly"
 ```
 
 ## Instructions
